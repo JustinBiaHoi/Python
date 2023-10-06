@@ -1,7 +1,6 @@
 import tkinter as tk
 from datetime import datetime
 
-
 def calculate_age():
     try:
         input_value = entry_input.get()
@@ -25,23 +24,20 @@ def calculate_age():
     except ValueError:
         result_label.config(text="Nhập năm sinh hoặc tuổi hợp lệ!")
 
+def on_enter_pressed(event):
+    calculate_age()
 
 window = tk.Tk()
 window.title("Máy tính tuổi thông minh")
-
-
 window.geometry("400x200")
-
 
 title_label = tk.Label(
     window, text="MÁY TÍNH TUỔI THÔNG MINH", font=("Helvetica", 16, "bold"), fg="red"
 )
 title_label.pack()
 
-
 label_option = tk.Label(window, text="Chọn phương án nhập:")
 label_option.pack()
-
 
 var = tk.StringVar()
 var.set("Tuổi")
@@ -54,21 +50,17 @@ radio_birth_year = tk.Radiobutton(
 radio_age.pack()
 radio_birth_year.pack()
 
-
 label_instruction = tk.Label(window, text="Nhập năm sinh hoặc tuổi:")
 entry_input = tk.Entry(window)
-
+entry_input.bind('<Return>', on_enter_pressed)  
 
 calculate_button = tk.Button(window, text="Tính", command=calculate_age)
 
-
 result_label = tk.Label(window, text="")
-
 
 label_instruction.pack()
 entry_input.pack()
 calculate_button.pack()
 result_label.pack()
-
 
 window.mainloop()
